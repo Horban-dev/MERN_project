@@ -13,7 +13,7 @@ const CartScreen = () => {
   const qty = new URLSearchParams(location.search).get('qty') || 1;
   const cart = useSelector(state => state.cart);
   const { cartItems } = cart;
-    console.log(cartItems)
+    
   useEffect(() => {
     if (id) {
       dispatch(addToCart(id, qty));
@@ -47,7 +47,7 @@ const CartScreen = () => {
                   </Col>
                   <Col md={2}>${item.price}</Col>
                   <Col md={2}>
-                    <Form.Control
+                  <Form.Control
                       as='select'
                       value={item.qty}
                       onChange={(e) =>
