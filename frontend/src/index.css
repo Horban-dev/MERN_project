@@ -12,6 +12,9 @@ h2 {
   padding: 0.5rem 0;
   font-size: 1.4rem;
 }
+.nav-item {
+  margin-right: 1.7rem !important;
+}
 .rating span {
   margin: 0.1rem;
 }

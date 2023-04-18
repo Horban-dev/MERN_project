@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
-import { USER_UPDATE_PROFILE_RESET } from '../constans/userConstants'
 
 const ProfileScreen = () => {
 
@@ -22,19 +21,16 @@ const ProfileScreen = () => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
-  const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
-  const { success } = userUpdateProfile
 
     
   useEffect(() => {
-    if(!user || !user.name || success) {
-        dispatch({type: USER_UPDATE_PROFILE_RESET})
+    if(!user || !user.name) {
         dispatch(getUserDetails('profile'))
     } else {
         setName(user.name)
         setEmail(user.email)
         }
-    }, [dispatch, userInfo, user, success])
+    }, [dispatch, userInfo, user])
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -51,7 +47,6 @@ const ProfileScreen = () => {
         <h2>User Profile</h2>
         {message && <Message variant='danger'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
-        {success && <Message variant='success'>Profile update</Message>}
         {loading && <Loader />}
           <Form onSubmit={submitHandler}>
             <Form.Group controlId='name'>
