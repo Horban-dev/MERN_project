@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import { Link,useNavigate,useLocation} from 'react-router-dom'
+import React, {useEffect } from 'react'
+import { useNavigate} from 'react-router-dom'
 import { Table, Button} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import {LinkContainer} from 'react-router-bootstrap'
 import Message from '../components/Message'
-import Loader from '../components/Loader'
+// import Loader from '../components/Loader'
 import { listUsers, deleteUser } from '../actions/userActions'
 
 
@@ -55,7 +55,7 @@ const UserListScreen = () => {
                                 (<i className='fas fa-times' style={{color: 'red'}}></i>) }
                             </td>
                             <td>
-                                <LinkContainer to={`/user/${user._id}/edit`}>
+                                <LinkContainer to={`/admin/user/${user._id}/edit`}>
                                     <Button variant='light' className='btn-sm'>
                                         <i className='fas fa-edit'></i>
                                     </Button>
