@@ -1,12 +1,13 @@
 import React, {useEffect} from 'react';
 import {Row, Col} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { listProducts } from '../actions/productActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import Paginate from '../components/Paginate';
 import Product from '../components/Product';
+import ProductCarousel from '../components/ProductCarousel';
 
 const HomeScreen = () => {
     const { keyword, pageNumber } = useParams();
@@ -18,10 +19,9 @@ const HomeScreen = () => {
     dispatch(listProducts(keyword, pageNumber || 1));
     }, [dispatch, keyword, pageNumber]);
 
-
-
     return (
         <>
+            {!keyword ? <ProductCarousel/> : (<Link to='/' className='btn btn-light'>Go Back</Link>)}
             <h1>Latest Products</h1>
             {loading ? <Loader/> : error ? <Message variant="danger">{error}</Message> : <Row>
                 {products.map(product => (
