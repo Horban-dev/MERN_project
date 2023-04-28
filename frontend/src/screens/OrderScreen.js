@@ -4,7 +4,7 @@ import {Col, Row, ListGroup, Image, Card, Button} from 'react-bootstrap';
 import axios from 'axios';
 import { PayPalButtons, usePayPalScriptReducer} from '@paypal/react-paypal-js';
 import Message from '../components/Message';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Loader from '../components/Loader';
 import { deliverOrder, getOrderDeatails, payOrder } from '../actions/orderActions';
 import { ORDER_DELIVER_RESET, ORDER_PAY_RESET } from '../constans/orderConstants';
@@ -14,6 +14,7 @@ const OrderScreen = () => {
     const [sdkReady, setSdkReady] = useState(false)
     const dispatch = useDispatch();
     const params = useParams();
+    const navigate = useNavigate();
     const orderId = params.id
     const orderDetails = useSelector((state) => state.orderDetails)
     const { order, loading, error } = orderDetails
@@ -28,6 +29,9 @@ const OrderScreen = () => {
     const {userInfo } = userLogin
     
     useEffect(() => {
+        if (!userInfo) {
+            navigate('/login')
+        }
         const addPaypalScript = async () => {
             const {data: clientId} = await axios.get('/api/config/paypal')
             const script = document.createElement('script')
